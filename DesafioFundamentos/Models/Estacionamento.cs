@@ -22,7 +22,17 @@ namespace DesafioFundamentos.Models
             // *IMPLEMENTE AQUI*
             Console.WriteLine("Digite a placa do veículo para estacionar:");
             placa = Console.ReadLine();
-            veiculos.Add(placa);
+            if (veiculos.Any(x => x.ToUpper() == placa.ToUpper())){
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Este Veiculo já foi cadastrado!");
+                Console.ResetColor();
+            }
+            else{
+                veiculos.Add(placa);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Veículo {placa} cadastrado!");
+                Console.ResetColor();
+            }
         }
 
         public void RemoverVeiculo()
@@ -47,11 +57,16 @@ namespace DesafioFundamentos.Models
                 // TODO: Remover a placa digitada da lista de veículos
                 // *IMPLEMENTE AQUI*
                 veiculos.Remove(placa);
-                Console.WriteLine($"O veículo {placa} foi removido e o preço total foi de: R$ {valorTotal}");
+                Console.Write($"O veículo {placa} foi removido e o preço total foi de: ");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"{valorTotal.ToString("C")}");
+                Console.ResetColor();
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Desculpe, esse veículo não está estacionado aqui. Confira se digitou a placa corretamente");
+                Console.ResetColor();
             }
         }
 
@@ -69,7 +84,9 @@ namespace DesafioFundamentos.Models
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Não há veículos estacionados.");
+                Console.ResetColor();
             }
         }
     }
